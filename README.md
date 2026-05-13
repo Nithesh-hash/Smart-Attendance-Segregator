@@ -1,139 +1,267 @@
-Smart Attendance Segregator
-VIT-IST — Office of Innovation, Startup and Technology Transfer
-A web-based attendance processing system built for VIT-IST that automates the segregation of mixed event attendance Excel sheets into school-wise reports — eliminating manual OD (On Duty) processing across 17 schools and 40+ department codes.
+# Smart Attendance Segregator
 
-Overview
-When students attend events on duty at VIT, attendance sheets contain registration numbers from multiple schools mixed together. Processing these manually for OD approval across 17 schools was time-consuming and error-prone.
+Built for VIT-IST — Office of Innovation, Startup and Technology Transfer, VIT Vellore
 
-Smart Attendance Segregator solves this by:
+A full-stack web-based attendance processing platform that automates the segregation of mixed event attendance sheets into school-wise OD (On Duty) reports across 17 schools and 40+ department codes.
 
-Managing the complete event lifecycle from registration to post-event processing
-Parsing uploaded Excel attendance sheets and extracting valid VIT registration numbers
-Resolving department codes through a school-code mapping table
-Routing each entry into school-specific datasets automatically
-Generating formatted Excel workbooks per school, bundled into a ZIP archive
-Tracking all segregation history and providing an analytics dashboard
-Deployed and actively used at VIT-IST. Processed 900+ OD entries across 3 major events — InnoAI 2026 AI/ML Hackathon, Vinner'26 Hackathon, and Alumni Interaction Session on Innovations and Startups.
+---
 
-Features
-Event Management
-Register and manage events with complete details (venue, timing, faculty coordinator, school, event type)
-Single-day and multi-day event support with per-day venue and timing slots
-Monitor pending vs completed segregation status
-Full admin controls — edit, delete events and history records
-Segregation Engine
-Automated segregation for 17 schools and 40+ department codes
-Parses uploaded .xlsx/.xls files via PHPSpreadsheet
-Extracts valid 9-character VIT registration numbers
-Resolves department codes through a school-code mapping table
-Bulk multi-event support — segregate multiple events in a single run
-School-wise formatted Excel reports with colour-coded headers
-ZIP-packaged output with auto-generated text and PDF summary reports
-Every segregation run persisted to the database with full metadata
-Analytics Dashboard
-KPI cards — events registered, segregations done, students processed, pending events
-Monthly trend analysis and event type breakdown
-School-wise participation distribution
-Venue utilisation and faculty coordinator leaderboards
-Key insights with advanced time-range and event-type filtering
-Downloadable analytics report as PDF
-Server-side JSON caching on analytics endpoint to avoid redundant aggregation queries
-AJAX-based lazy loading — analytics data fetched only when the tab is opened
-Security
-SQL injection prevention via parameterised PDO queries
-Session regeneration on login and server-side upload validation
-Back-button hijack prevention via history.pushState for session security
-Environment configuration via .env (never committed to version control)
-Upload verification using is_uploaded_file()
-Cache-control headers on all authenticated pages
-Tech Stack
-Layer	Technology
-Backend	PHP 8.1, PDO
-Database	MySQL 8
-Frontend	Vanilla JavaScript (ES6), AJAX
-Excel Processing	PHPSpreadsheet
-Reports	jsPDF, ZipArchive
-Visualisation	Chart.js
-Environment	vlucas/phpdotenv
-Database Schema
-events               — event registration with metadata and day-wise JSON
-segregation_history  — full run history with event and ZIP metadata
-segregation_stats    — per-school student counts per run (for analytics)
-schools              — school name to department code mapping
-Full schema available in setup.sql.
+## 📌 Overview
 
-Installation
-Prerequisites
-PHP 8.1+
-MySQL 8+
-Composer
-Apache/Nginx with .htaccess support
-Steps
-1. Clone the repository
+At VIT, event attendance sheets often contain registration numbers from students belonging to multiple schools. Manually processing these sheets for OD approval across all schools was repetitive, time-consuming, and error-prone.
 
+**Smart Attendance Segregator** streamlines this workflow by automating the complete attendance segregation process — from event registration to generation of school-wise Excel reports.
+
+The system:
+
+* Parses uploaded Excel attendance sheets
+* Extracts and validates VIT registration numbers
+* Maps department codes to corresponding schools
+* Automatically segregates entries into school-specific datasets
+* Generates formatted Excel reports for each school
+* Bundles outputs into downloadable ZIP archives
+* Maintains segregation history and analytics dashboards
+
+The platform is actively deployed and used at VIT-IST, successfully processing **900+ OD entries** across major institutional events including:
+
+* InnoAI 2026 AI/ML Hackathon
+* Vinner’26 Hackathon
+* Alumni Interaction Session on Innovations and Startups
+
+---
+
+# ✨ Features
+
+## 🎯 Event Management
+
+* Register and manage events with complete metadata
+* Support for both single-day and multi-day events
+* Venue and timing slot management
+* Pending vs completed segregation tracking
+* Admin controls for editing and deleting events/history
+
+---
+
+## ⚙️ Segregation Engine
+
+* Automated segregation for **17 schools** and **40+ department codes**
+* Excel parsing using PHPSpreadsheet
+* Validation of VIT registration numbers
+* Department-to-school mapping system
+* Bulk multi-event segregation support
+* School-wise formatted Excel reports
+* ZIP-packaged downloadable outputs
+* Auto-generated TXT and PDF summary reports
+* Persistent segregation history stored in database
+
+---
+
+## 📊 Analytics Dashboard
+
+* KPI cards for:
+
+  * Events registered
+  * Segregations completed
+  * Students processed
+  * Pending events
+
+* Analytics visualisations including:
+
+  * Monthly trends
+  * Event type breakdown
+  * School-wise participation
+  * Venue utilisation
+  * Faculty coordinator leaderboards
+
+* Advanced filtering by:
+
+  * Time range
+  * Event type
+
+* Downloadable analytics reports in PDF format
+
+* Server-side JSON caching for performance optimisation
+
+* AJAX-based lazy loading for efficient dashboard rendering
+
+---
+
+## 🔐 Security Features
+
+* SQL Injection prevention using parameterised PDO queries
+* Session regeneration after authentication
+* Upload validation using `is_uploaded_file()`
+* Environment variable management using `.env`
+* Cache-control headers for authenticated pages
+* Back-button hijack prevention using `history.pushState`
+
+---
+
+# 🛠️ Tech Stack
+
+| Layer                  | Technology                     |
+| ---------------------- | ------------------------------ |
+| Backend                | PHP 8.1, PDO                   |
+| Database               | MySQL 8                        |
+| Frontend               | Vanilla JavaScript (ES6), AJAX |
+| Excel Processing       | PHPSpreadsheet                 |
+| Reports                | jsPDF, ZipArchive              |
+| Visualisation          | Chart.js                       |
+| Environment Management | vlucas/phpdotenv               |
+
+---
+
+# 🗄️ Database Schema
+
+| Table                 | Description                                      |
+| --------------------- | ------------------------------------------------ |
+| `events`              | Stores event metadata and scheduling information |
+| `segregation_history` | Maintains segregation run history                |
+| `segregation_stats`   | Stores school-wise analytics data                |
+| `schools`             | Department-code to school mapping                |
+
+Complete schema available in `setup.sql`.
+
+---
+
+# 🚀 Installation
+
+## Prerequisites
+
+* PHP 8.1+
+* MySQL 8+
+* Composer
+* Apache/Nginx with `.htaccess` support
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/yourusername/smart-attendance-segregator.git
+
 cd smart-attendance-segregator
-2. Install dependencies
+```
 
+### 2. Install Dependencies
+
+```bash
 composer install
-3. Configure environment
+```
 
+### 3. Configure Environment Variables
+
+```bash
 cp _env .env
-Edit .env with your database credentials:
+```
 
+Update `.env` with your database credentials:
+
+```env
 DB_HOST=localhost
 DB_NAME=attendance_segregator
 DB_USER=your_db_user
 DB_PASS=your_db_password
-4. Set up the database
+```
 
+---
+
+### 4. Set Up the Database
+
+```bash
 mysql -u root -p < setup.sql
-5. Configure web server
+```
 
-Rename _htaccess to .htaccess:
+---
 
+### 5. Configure Web Server
+
+Rename `_htaccess` to `.htaccess`:
+
+```bash
 mv _htaccess .htaccess
-Ensure downloads/ directory is writable:
+```
 
+Create writable downloads directory:
+
+```bash
 mkdir -p downloads
+
 chmod 777 downloads
-6. Access the application
+```
 
+---
+
+### 6. Run the Application
+
+```text
 http://localhost/smart-attendance-segregator/
-Default credentials are set in your .env file under APP_USER and APP_PASS.
+```
 
-📁 Project Structure
-├── index.php              — Login page
-├── register_event.php     — Main application (event management, segregation, admin panel)
-├── analytics_data.php     — AJAX endpoint for analytics data with server-side caching
-├── db.php                 — PDO database connection
-├── setup.sql              — Database schema and seed data
-├── style.css              — Global styles
-├── register_event.css     — Application-specific styles
-├── register_event.js      — All frontend logic (segregation, admin tables, analytics charts)
-├── composer.json          — PHP dependencies
-├── _env                   — Environment variable template
-├── _htaccess              — Apache config (rename to .htaccess)
-└── downloads/             — Generated Excel, ZIP and summary files (auto-created)
-🏫 Supported Schools & Codes
-School	Department Codes
-SENSE	BVD, BEC, BML
-SCOPE	BBS, BDS, BCT, BCB, MIC, BAI, MID, BCI, BKT, BCE
-SCORE	BIT, BCA, BCS, MCA, MAG, BYB, BDE, MIS
-SELECT	BEE, BEL, BEI
-SMEC	MMT, BMV, BST, BMA, BME, BMM
-SBST	BBT, MSI
-SSL	BFN, BBC, BCC, BBP
-VITBS	BBA
-+ 9 more	See setup.sql for full list
-Team
-Role	Name
-Developer	Umair Ahmed R
-Developer	Nithesh Kumar T
-Developer	Srishti Singh
-| Mentor | Dr. Jothish Kumar M |
+Default login credentials are configured inside `.env` using:
 
-📄 License
-This project was built for internal use at VIT-IST. Please contact the authors before reuse or redistribution.
+```env
+APP_USER=
+APP_PASS=
+```
 
-Built for VIT-IST — Office of Innovation, Startup and Technology Transfer, VIT Vellore
+---
+
+# 📁 Project Structure
+
+```text
+├── index.php
+├── register_event.php
+├── analytics_data.php
+├── db.php
+├── setup.sql
+├── style.css
+├── register_event.css
+├── register_event.js
+├── composer.json
+├── _env
+├── _htaccess
+└── downloads/
+```
+
+---
+
+# 🏫 Supported Schools & Department Codes
+
+| School  | Department Codes                                 |
+| ------- | ------------------------------------------------ |
+| SENSE   | BVD, BEC, BML                                    |
+| SCOPE   | BBS, BDS, BCT, BCB, MIC, BAI, MID, BCI, BKT, BCE |
+| SCORE   | BIT, BCA, BCS, MCA, MAG, BYB, BDE, MIS           |
+| SELECT  | BEE, BEL, BEI                                    |
+| SMEC    | MMT, BMV, BST, BMA, BME, BMM                     |
+| SBST    | BBT, MSI                                         |
+| SSL     | BFN, BBC, BCC, BBP                               |
+| VITBS   | BBA                                              |
+| +9 More | Available in `setup.sql`                         |
+
+---
+
+# 👨‍💻 Team
+
+| Role      | Name                |
+| --------- | ------------------- |
+| Developer | Nithesh Kumar T     |
+| Developer | Umair Ahmed R       |
+| Developer | Srishti Singh       |
+| Mentor    | Dr. Jothish Kumar M |
+
+---
+
+# 📄 License
+
+This project was developed for internal use at VIT-IST.
+Please contact the authors before reuse or redistribution.
+
+---
+
+## ⭐ Acknowledgement
+
+Built for VIT-IST, VIT Vellore to streamline institutional OD attendance processing through automation, analytics, and scalable event management.
