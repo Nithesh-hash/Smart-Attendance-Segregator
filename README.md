@@ -24,9 +24,22 @@ The system:
 
 The platform is actively deployed and used at VIT-IST, successfully processing **900+ OD entries** across major institutional events including:
 
-* InnoAI 2026 AI/ML Hackathon
-* Vinner’26 Hackathon
-* Alumni Interaction Session on Innovations and Startups
+The system we developed, Segregated the OD's for
+*  InnoAl 2026 Al/ML Hackathon
+*  Vinner'26 Hackathon
+* Alumni interaction session on Innovations and startups
+* Summer Startup Launchpad event
+* Orientation Meeting for IIC Student Council Members
+* Robowars 2026
+* Drone Workshop
+* Business Plan Presentation and Mentor Linkage Session
+* Ice Breaker Session
+* Startup Bootcamp
+* Innohack 2.0
+* Build your VCU for EV
+* Demo Day
+* Panel Discussion with Innovation and Start-up & SSV
+* IIC Recruitment 2026-27
 
 ---
 
